@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Page Not Found | bRIDGIN'" description="The page you're looking for doesn't exist." noindex>
+  <section class="relative flex min-h-[80svh] items-center overflow-hidden bg-ink-950">
+    <div class="pointer-events-none absolute inset-0 cyber-grid opacity-30 animate-gridDrift"></div>
+    <div class="glow-blob pointer-events-none absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="container-x relative text-center">
+      <p class="font-heading text-7xl font-bold text-gradient-cyan sm:text-9xl">404</p>
+      <h1 class="mt-4 text-2xl font-bold sm:text-3xl">This bridge doesn't exist… yet.</h1>
+      <p class="mx-auto mt-3 max-w-md text-white/60">The page you're looking for may have moved or never existed. Let's get you back on track.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a href="/" class="btn-primary">Back to Home</a>
+        <a href="/contact-us" class="btn-outline">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

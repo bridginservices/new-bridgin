@@ -1,0 +1,30 @@
+---
+import Icon from './Icon.astro';
+interface Props {
+  service: {
+    slug: string;
+    name: string;
+    icon: string;
+    excerpt: string;
+  };
+  index?: number;
+}
+const { service, index = 0 } = Astro.props;
+---
+<a
+  href={`/services/${service.slug}`}
+  class="reveal group surface surface-hover flex flex-col p-7"
+  data-delay={(index % 3) * 0.08}
+>
+  <div class="flex items-center justify-between">
+    <div class="flex h-13 w-13 items-center justify-center rounded-xl bg-cyan/10 p-3 text-cyan transition-all duration-300 group-hover:bg-cyan group-hover:text-ink-950 group-hover:shadow-glow">
+      <Icon name={service.icon} class="h-7 w-7" />
+    </div>
+    <span class="font-heading text-sm text-white/25">{String(index + 1).padStart(2, '0')}</span>
+  </div>
+  <h3 class="mt-5 text-xl font-semibold text-white group-hover:text-cyan">{service.name}</h3>
+  <p class="mt-2 flex-1 text-sm leading-relaxed text-white/60">{service.excerpt}</p>
+  <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-cyan opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+    Learn more <Icon name="arrow" class="h-4 w-4" />
+  </span>
+</a>

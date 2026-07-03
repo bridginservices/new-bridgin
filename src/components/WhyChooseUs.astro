@@ -1,0 +1,42 @@
+---
+// Why Choose Us (spec §4.4) — 6 blocks, 3/row desktop, 2 tablet,
+// 1 mobile. Staggered fade-up on scroll + hover lift/glow.
+import Icon from './Icon.astro';
+import SectionHeading from './SectionHeading.astro';
+
+const points = [
+  { icon: 'chart', title: 'Data-Driven Strategy', text: 'Every decision backed by analytics, not guesswork, so your budget works harder.' },
+  { icon: 'shield', title: 'Transparent Reporting', text: 'Clear, honest performance reports; no jargon, no hidden numbers, ever.' },
+  { icon: 'funnel', title: 'Full-Funnel Expertise', text: 'From branding to performance ads, one team handles your entire digital presence.' },
+  { icon: 'handshake', title: 'Dedicated Growth Partner', text: 'We treat your business goals as our own, staying invested long-term.' },
+  { icon: 'spark', title: 'Creative That Converts', text: 'Eye-catching design paired with strategy that actually drives real business results.' },
+  { icon: 'trophy', title: 'Proven Local Impact', text: 'Real local businesses, real measurable growth — see our results, not just promises.' },
+];
+---
+<section class="section-y bg-ink-900">
+  <div class="container-x">
+    <SectionHeading
+      eyebrow="Why bRIDGIN'"
+      title="Why Businesses Choose Us"
+      subtitle="Not just another agency — a growth partner obsessed with measurable results."
+      center
+    />
+
+    <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        points.map((p, i) => (
+          <article
+            class="reveal group surface surface-hover p-7"
+            data-delay={(i % 3) * 0.1}
+          >
+            <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-cyan/10 text-cyan transition-all duration-300 group-hover:bg-cyan group-hover:text-ink-950 group-hover:shadow-glow">
+              <Icon name={p.icon} class="h-7 w-7" />
+            </div>
+            <h3 class="mt-5 text-xl font-semibold text-white group-hover:text-cyan">{p.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-white/65">{p.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

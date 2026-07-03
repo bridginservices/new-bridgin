@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import CTASection from '../components/CTASection.astro';
+import { projects } from '../data/projects.js';
+---
+<BaseLayout
+  title="Projects & Case Studies | bRIDGIN' Marketing"
+  description="See how bRIDGIN' has helped local businesses like Veer Furnitech, Maharani Rental Clothing, Mohite's Jungle Safari, Mihika Investments and Aarambh Sutra Interiors grow digitally."
+>
+  <PageHeader
+    eyebrow="Our Work"
+    title="Real Businesses. Real Growth."
+    subtitle="A look at the local brands we've partnered with to bridge the gap between vision and digital success."
+  />
+
+  <!-- Placeholder note -->
+  <div class="container-x -mt-6 mb-2">
+    <p class="mx-auto max-w-3xl rounded-xl border border-cyan/15 bg-cyan/[0.04] px-4 py-3 text-center text-xs text-white/55">
+      Note: project visuals below are placeholders — swap in real screenshots and verified metrics before launch.
+    </p>
+  </div>
+
+  <section class="section-y pt-8 bg-ink-900">
+    <div class="container-x">
+      <div class="grid gap-8 md:grid-cols-2">
+        {projects.map((p, i) => <ProjectCard project={p} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    headline="Your Business Could Be Our Next Success Story."
+    subline="Let's build the bridge between where your business is and where it deserves to be."
+    secondaryLabel="Explore Services"
+    secondaryHref="/services"
+  />
+</BaseLayout>

@@ -1,0 +1,81 @@
+---
+// Testimonials (spec §4.5) — Swiper autoplay/loop, 1 card mobile /
+// 2–3 desktop, pause-on-hover, swipeable, subtle card hover lift.
+import { testimonials } from '../data/testimonials.js';
+import SectionHeading from './SectionHeading.astro';
+import StarRating from './StarRating.astro';
+import Icon from './Icon.astro';
+---
+<section class="section-y relative overflow-hidden bg-ink-950">
+  <div class="glow-blob pointer-events-none absolute right-0 top-24 h-96 w-96"></div>
+  <div class="container-x relative">
+    <SectionHeading
+      eyebrow="Success Stories, Not Just Services"
+      title="Real Businesses. Real Growth."
+      subtitle="Hear from the local brands we've helped bridge the gap to digital success."
+      center
+    />
+
+    <div class="reveal mt-14">
+      <div class="swiper testimonial-swiper">
+        <div class="swiper-wrapper pb-2">
+          {
+            testimonials.map((t) => (
+              <div class="swiper-slide h-auto">
+                <figure class="surface flex h-full flex-col p-7 transition-all duration-300 hover:-translate-y-1 hover:border-cyan/40 hover:shadow-glow">
+                  <Icon name="quote" class="h-8 w-8 text-cyan/70" />
+                  <blockquote class="mt-4 flex-1 text-sm leading-relaxed text-white/80">
+                    "{t.quote}"
+                  </blockquote>
+                  <div class="mt-5 flex flex-wrap gap-1.5">
+                    {t.services.map((s) => (
+                      <span class="rounded-full border border-cyan/25 bg-cyan/5 px-2.5 py-0.5 text-[11px] text-cyan/90">
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                  <figcaption class="mt-5 flex items-center justify-between border-t border-white/10 pt-4">
+                    <span class="font-heading font-semibold text-white">{t.business}</span>
+                    <StarRating rating={t.rating} />
+                  </figcaption>
+                </figure>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="testimonial-pagination mt-8 flex justify-center gap-2"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonial-pagination :global(.swiper-pagination-bullet) {
+    width: 8px; height: 8px; border-radius: 9999px; background: rgba(255,255,255,0.25); opacity: 1; transition: all .3s ease;
+  }
+  .testimonial-pagination :global(.swiper-pagination-bullet-active) {
+    width: 26px; background: #00e5ff; box-shadow: 0 0 10px rgba(0,229,255,.6);
+  }
+</style>
+
+<script>
+  import Swiper from 'swiper';
+  import { Autoplay, Pagination, Keyboard } from 'swiper/modules';
+  import 'swiper/css';
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  new Swiper('.testimonial-swiper', {
+    modules: [Autoplay, Pagination, Keyboard],
+    loop: true,
+    spaceBetween: 24,
+    slidesPerView: 1,
+    keyboard: { enabled: true },
+    autoplay: reduce ? false : { delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true },
+    pagination: { el: '.testimonial-pagination', clickable: true },
+    a11y: { enabled: true },
+    breakpoints: {
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+</script>

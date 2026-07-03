@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import CTASection from '../../components/CTASection.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
+---
+<BaseLayout
+  title="Blog — Digital Marketing Tips for Local Businesses | bRIDGIN'"
+  description="Practical digital marketing tips for local businesses — SEO, Google My Business, websites, social media and more, from the bRIDGIN' team."
+>
+  <PageHeader
+    eyebrow="bRIDGIN' Blog"
+    title="Insights to Grow Your Business"
+    subtitle="Practical, no-jargon digital marketing tips for local brands ready to grow."
+  />
+
+  <div class="container-x -mt-6 mb-2">
+    <p class="mx-auto max-w-3xl rounded-xl border border-cyan/15 bg-cyan/[0.04] px-4 py-3 text-center text-xs text-white/55">
+      Note: the posts below are placeholder starter articles — replace with original content before launch.
+    </p>
+  </div>
+
+  <section class="section-y pt-8 bg-ink-900">
+    <div class="container-x">
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map((post, i) => <BlogCard post={post} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    headline="Prefer Growth Done For You?"
+    subline="Skip the DIY. Let bRIDGIN' handle your digital marketing end to end."
+    primaryLabel="Get a Free Consultation"
+    secondaryLabel="Explore Services"
+    secondaryHref="/services"
+  />
+</BaseLayout>

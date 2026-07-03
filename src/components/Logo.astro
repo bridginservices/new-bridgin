@@ -1,0 +1,20 @@
+---
+// Text-based wordmark lockup for bRIDGIN' (white + cyan) with a
+// small bridge glyph tying into the brand metaphor. No raster asset.
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+<span class={`inline-flex items-center gap-2 font-heading font-bold ${className}`} aria-label="bRIDGIN' Marketing Services home">
+  <!-- Bridge glyph -->
+  <svg class="h-6 w-6 text-cyan drop-shadow-glow" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+    <path d="M2 22h28" />
+    <path d="M4 22c0-7 8-7 8 0M12 22c0-9 8-9 8 0M20 22c0-7 8-7 8 0" opacity="0.9" />
+    <line x1="6" y1="22" x2="6" y2="26" />
+    <line x1="26" y1="22" x2="26" y2="26" />
+  </svg>
+  <span class="text-xl tracking-tight text-white">
+    b<span class="text-cyan">RIDGIN</span><span class="text-cyan">'</span>
+  </span>
+</span>

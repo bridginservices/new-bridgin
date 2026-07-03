@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSlider from '../components/HeroSlider.astro';
+import OurStory from '../components/OurStory.astro';
+import ServicesWheel from '../components/ServicesWheel.astro';
+import WhyChooseUs from '../components/WhyChooseUs.astro';
+import TestimonialSlider from '../components/TestimonialSlider.astro';
+import CTASection from '../components/CTASection.astro';
+---
+<BaseLayout
+  title="bRIDGIN' Marketing Services — Digital Marketing that Multiplies Local Businesses"
+  description="bRIDGIN' Marketing Services helps local businesses grow digitally with SEO, performance marketing, social media, web & app development, product design and branding. Bridging brands to digital success."
+  ogImage="/og/og-default.jpg"
+  transparentHeader
+>
+  <HeroSlider />
+  <OurStory />
+  <ServicesWheel />
+  <WhyChooseUs />
+  <TestimonialSlider />
+  <CTASection />
+</BaseLayout>

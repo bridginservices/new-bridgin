@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+<BaseLayout
+  title="Terms of Service | bRIDGIN' Marketing"
+  description="Terms of Service for bRIDGIN' Marketing Services."
+  noindex
+>
+  <PageHeader eyebrow="Legal" title="Terms of Service" />
+  <section class="section-y bg-ink-900">
+    <div class="container-x blog-prose max-w-3xl">
+      <p class="rounded-xl border border-cyan/15 bg-cyan/5 px-4 py-3 text-sm text-white/60">
+        <strong>Placeholder document.</strong> Replace this with lawyer-reviewed Terms of Service before launch.
+      </p>
+      <h2>1. Acceptance of Terms</h2>
+      <p>By accessing this website you agree to these Terms of Service and our Privacy Policy.</p>
+      <h2>2. Services</h2>
+      <p>bRIDGIN' Marketing Services provides digital marketing services as described on this website. Specific deliverables are governed by individual client agreements.</p>
+      <h2>3. Intellectual Property</h2>
+      <p>All content on this site, including text, graphics and the bRIDGIN' brand, is owned by bRIDGIN' Marketing Services unless otherwise noted.</p>
+      <h2>4. Limitation of Liability</h2>
+      <p>This website is provided "as is". We are not liable for any indirect or consequential loss arising from its use.</p>
+      <h2>5. Contact</h2>
+      <p>Questions about these terms? Reach us via our <a href="/contact-us">Contact page</a>.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  .blog-prose h2 { color:#fff; font-family:'Space Grotesk',sans-serif; font-size:1.4rem; font-weight:700; margin-top:2rem; margin-bottom:.5rem; }
+  .blog-prose p { color:rgba(255,255,255,.72); margin:.75rem 0; line-height:1.7; }
+  .blog-prose a { color:#00e5ff; text-decoration:underline; }
+</style>

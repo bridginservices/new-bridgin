@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   bRIDGIN' — Global styles / design tokens
+   Brand: black (#0A0A0A) background, white/off-white text,
+   vibrant cyan (#00E5FF) accent used consistently.
+   ============================================================ */
+
+@layer base {
+  :root {
+    --brand-cyan: #00e5ff;
+    --brand-cyan-deep: #00b8cc;
+    --bg: #0a0a0a;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Respect users who prefer reduced motion — kill non-essential motion. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    @apply bg-ink-900 font-body text-offwhite antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading font-bold tracking-tight text-white;
+    text-wrap: balance;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  /* Accessible focus ring against the dark background */
+  :focus-visible {
+    outline: 2px solid var(--brand-cyan);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: rgba(0, 229, 255, 0.3);
+    color: #fff;
+  }
+}
+
+@layer components {
+  /* Section container */
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+
+  .section-y {
+    @apply py-20 md:py-28;
+  }
+
+  /* Cyan gradient text for hero/section headings */
+  .text-gradient-cyan {
+    @apply bg-gradient-to-r from-white via-cyan-bright to-cyan bg-clip-text text-transparent;
+  }
+
+  .heading-accent {
+    color: var(--brand-cyan);
+    text-shadow: 0 0 22px rgba(0, 229, 255, 0.35);
+  }
+
+  /* Small eyebrow label above section titles */
+  .eyebrow {
+    @apply mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.25em] text-cyan;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply inline-block h-px w-8 bg-cyan;
+  }
+
+  /* Buttons ------------------------------------------------ */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold
+           transition-all duration-300 will-change-transform;
+  }
+  .btn-primary {
+    @apply btn bg-cyan text-ink-950 shadow-glow hover:scale-[1.04] hover:shadow-glow-lg hover:brightness-110;
+  }
+  .btn-outline {
+    @apply btn border border-cyan/60 text-cyan hover:scale-[1.04] hover:bg-cyan/10 hover:shadow-glow;
+  }
+  .btn-ghost {
+    @apply btn text-white/80 hover:text-cyan;
+  }
+
+  /* Card surface */
+  .surface {
+    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm;
+  }
+  .surface-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:border-cyan/40 hover:shadow-glow;
+  }
+
+  /* Faint animated cyan grid background */
+  .cyber-grid {
+    background-image:
+      linear-gradient(rgba(0, 229, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 229, 255, 0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Radial cyan glow blob */
+  .glow-blob {
+    background: radial-gradient(circle, rgba(0, 229, 255, 0.25) 0%, rgba(0, 229, 255, 0) 65%);
+    filter: blur(10px);
+  }
+}
+
+@layer utilities {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Fade/slide entrance base state — GSAP or IntersectionObserver reveals it.
+     Falls back to visible if JS is off or reduced-motion is set. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+  .no-js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

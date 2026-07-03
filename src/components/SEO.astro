@@ -1,0 +1,52 @@
+---
+// Centralized <head> SEO: title, description, canonical, Open Graph
+// and Twitter Card tags (spec §10). OG image defaults to a hero image.
+import { site } from '../data/site.js';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Path (relative to /public or site) for the OG image. */
+  ogImage?: string;
+  /** Override the canonical path; defaults to current pathname. */
+  path?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+}
+const {
+  title,
+  description = site.description,
+  ogImage = '/og/og-default.jpg',
+  path,
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+
+const canonicalPath = path ?? Astro.url.pathname;
+const canonical = new URL(canonicalPath, Astro.site).href;
+const ogImageUrl = new URL(ogImage, Astro.site).href;
+const fullTitle = title.includes("bRIDGIN'")
+  ? title
+  : `${title} | bRIDGIN' Marketing Services`;
+---
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph -->
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={site.legalName} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:alt" content={`${site.name} — ${title}`} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+<meta name="theme-color" content="#0A0A0A" />

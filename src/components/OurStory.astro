@@ -1,0 +1,56 @@
+---
+// Our Story (spec §4.2) — exact copy, do not alter. Two-column,
+// text + bridge image, offset reveal timing for a parallax feel.
+import { Image } from 'astro:assets';
+import { img } from '../utils/images.js';
+import Icon from './Icon.astro';
+---
+<section class="section-y bg-ink-900">
+  <div class="container-x grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    <!-- Text -->
+    <div>
+      <p class="eyebrow">Our Story</p>
+      <h2 class="reveal text-3xl font-bold leading-tight sm:text-4xl">
+        Built from a Setback. <span class="heading-accent">Driven by Purpose.</span>
+      </h2>
+      <div class="mt-6 space-y-5 text-[15px] leading-relaxed text-white/70">
+        <p class="reveal" data-delay="0.05">
+          "The journey of bRIDGIN' started from a <span class="font-semibold text-cyan">LAY OFF</span>... but what
+          seemed like an ending became the foundation of a bigger purpose. Instead of accepting setbacks, we chose to
+          create opportunities, not just for ourselves, but for businesses and aspiring professionals. Every challenge
+          taught us resilience, every project strengthened our expertise, and every client relationship reinforced our
+          commitment to delivering meaningful results."
+        </p>
+        <p class="reveal" data-delay="0.1">
+          "Today, bRIDGIN' stands for innovation, creativity, transparency, and growth. We don't believe in simply
+          providing services; we believe in building lasting partnerships, solving real business problems, and helping
+          brands bridge the gap between vision and success. Our story is proof that determination, trust, and consistent
+          execution can transform life's biggest obstacles into opportunities that inspire others."
+        </p>
+      </div>
+      <a href="/about-us" class="btn-outline reveal mt-8" data-delay="0.15">
+        More About Us <Icon name="arrow" class="h-4 w-4" />
+      </a>
+    </div>
+
+    <!-- Image -->
+    <div class="reveal relative" data-delay="0.15">
+      <div class="glow-blob pointer-events-none absolute -inset-6 -z-10"></div>
+      <figure class="relative m-0 overflow-hidden rounded-3xl border border-white/10">
+        <Image
+          src={img('story-bridge.jpg')}
+          alt="Symbolic bridge representing bRIDGIN' Marketing's journey from setback to success"
+          title="Our Story — bRIDGIN' Marketing Services"
+          widths={[500, 800]}
+          sizes="(max-width: 1024px) 100vw, 45vw"
+          loading="lazy"
+          class="aspect-[4/5] w-full object-cover"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-ink-950/70 via-transparent to-transparent"></div>
+        <figcaption class="absolute bottom-5 left-5 right-5 text-sm font-medium text-white/90">
+          Bridging the gap between vision and success.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,235 @@
+---
+// Global sticky navigation (spec §3).
+// - Transparent over hero, turns solid black + blur on scroll.
+// - Animated cyan underline on hover, active-page indicator.
+// - Services shows a desktop hover mega-menu of service pages.
+// - Mobile: hamburger -> full-screen drawer with staggered links.
+// - A floating Call Now button appears on mobile (thumb reach).
+import { navLinks, site } from '../data/site.js';
+import { services } from '../data/services.js';
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href);
+---
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+  data-solid="false"
+>
+  <nav class="container-x flex h-[68px] items-center justify-between" aria-label="Primary">
+    <!-- Logo -->
+    <a href="/" class="shrink-0 rounded-md" aria-label="bRIDGIN' — Home">
+      <Logo />
+    </a>
+
+    <!-- Desktop menu -->
+    <ul class="hidden items-center gap-1 lg:flex">
+      {
+        navLinks.map((link) => (
+          <li class={link.label === 'Services' ? 'group relative' : ''}>
+            <a
+              href={link.href}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+              class:list={[
+                'nav-link relative px-4 py-2 text-sm font-medium transition-colors duration-200',
+                isActive(link.href) ? 'text-cyan' : 'text-white/85 hover:text-cyan',
+              ]}
+            >
+              {link.label}
+            </a>
+            {link.label === 'Services' && (
+              <div class="invisible absolute left-1/2 top-full w-64 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                <div class="surface grid grid-cols-1 gap-0.5 p-2 shadow-glow-sm">
+                  {services.map((s) => (
+                    <a
+                      href={`/services/${s.slug}`}
+                      class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-white/80 transition-colors hover:bg-cyan/10 hover:text-cyan"
+                    >
+                      <Icon name={s.icon} class="h-4 w-4 text-cyan" />
+                      {s.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- Call Now (desktop) -->
+    <a
+      href={site.phoneHref}
+      class="btn-primary hidden animate-pulseGlow lg:inline-flex"
+      data-analytics="call-now-desktop"
+    >
+      <Icon name="phone" class="h-4 w-4" /> CALL NOW
+    </a>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="nav-toggle"
+      class="relative z-50 flex h-11 w-11 items-center justify-center rounded-lg text-white lg:hidden"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-drawer"
+    >
+      <span class="sr-only">Toggle navigation</span>
+      <svg class="hamburger h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line class="line-top" x1="4" y1="7" x2="20" y2="7" />
+        <line class="line-mid" x1="4" y1="12" x2="20" y2="12" />
+        <line class="line-bot" x1="4" y1="17" x2="20" y2="17" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div
+    id="mobile-drawer"
+    class="invisible fixed inset-0 z-40 translate-x-full opacity-0 transition-all duration-300 lg:hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile navigation"
+  >
+    <div class="absolute inset-0 bg-ink-950/95 backdrop-blur-xl"></div>
+    <ul class="relative flex h-full flex-col items-center justify-center gap-2">
+      {
+        navLinks.map((link, i) => (
+          <li
+            class="drawer-item translate-y-4 opacity-0"
+            style={`--i:${i}`}
+          >
+            <a
+              href={link.href}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+              class:list={[
+                'block px-6 py-3 font-heading text-2xl font-semibold',
+                isActive(link.href) ? 'text-cyan' : 'text-white hover:text-cyan',
+              ]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+      <li class="drawer-item translate-y-4 opacity-0 pt-4" style={`--i:${navLinks.length}`}>
+        <a href={site.phoneHref} class="btn-primary text-base">
+          <Icon name="phone" class="h-4 w-4" /> CALL NOW
+        </a>
+      </li>
+    </ul>
+  </div>
+</header>
+
+<!-- Floating Call button (mobile only) -->
+<a
+  href={site.phoneHref}
+  class="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-cyan text-ink-950 shadow-glow-lg animate-pulseGlow lg:hidden"
+  aria-label="Call bRIDGIN' now"
+>
+  <Icon name="phone" class="h-6 w-6" />
+</a>
+
+<style>
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 0.35rem;
+    height: 2px;
+    background: #00e5ff;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
+  }
+  .nav-link:hover::after,
+  .nav-link[aria-current='page']::after {
+    transform: scaleX(1);
+  }
+
+  /* Drawer open state (toggled via .drawer-open on <html>) */
+  :global(html.drawer-open) #mobile-drawer {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+  :global(html.drawer-open) .drawer-item {
+    animation: drawerIn 0.4s ease forwards;
+    animation-delay: calc(var(--i) * 60ms + 120ms);
+  }
+  @keyframes drawerIn {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  /* Hamburger -> X */
+  :global(html.drawer-open) .line-top {
+    transform: translateY(5px) rotate(45deg);
+  }
+  :global(html.drawer-open) .line-mid {
+    opacity: 0;
+  }
+  :global(html.drawer-open) .line-bot {
+    transform: translateY(-5px) rotate(-45deg);
+  }
+  .line-top,
+  .line-mid,
+  .line-bot {
+    transform-origin: center;
+    transition:
+      transform 0.3s ease,
+      opacity 0.2s ease;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .drawer-item {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  const header = document.getElementById('site-header');
+  const toggle = document.getElementById('nav-toggle');
+  const drawer = document.getElementById('mobile-drawer');
+  const root = document.documentElement;
+
+  // Solid background after scrolling past the hero threshold.
+  const onScroll = () => {
+    if (!header) return;
+    const solid = window.scrollY > 40;
+    header.dataset.solid = String(solid);
+    header.classList.toggle('bg-ink-950/90', solid);
+    header.classList.toggle('backdrop-blur-lg', solid);
+    header.classList.toggle('shadow-lg', solid);
+    header.classList.toggle('shadow-cyan/5', solid);
+    header.classList.toggle('border-b', solid);
+    header.classList.toggle('border-white/5', solid);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Mobile drawer open/close
+  const setDrawer = (open: boolean) => {
+    root.classList.toggle('drawer-open', open);
+    root.classList.toggle('overflow-hidden', open);
+    toggle?.setAttribute('aria-expanded', String(open));
+    toggle?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  toggle?.addEventListener('click', () =>
+    setDrawer(!root.classList.contains('drawer-open'))
+  );
+  drawer?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => setDrawer(false))
+  );
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setDrawer(false);
+  });
+</script>

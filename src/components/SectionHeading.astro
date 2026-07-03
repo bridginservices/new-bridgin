@@ -1,0 +1,17 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  center?: boolean;
+  class?: string;
+}
+const { eyebrow, title, subtitle, center = false, class: className = '' } = Astro.props;
+---
+<div class:list={['max-w-2xl', center && 'mx-auto text-center', className]}>
+  {eyebrow && <p class:list={['eyebrow', center && 'justify-center']}>{eyebrow}</p>}
+  <h2 class="reveal text-3xl font-bold leading-tight sm:text-4xl lg:text-[2.75rem]">
+    <slot name="title">{title}</slot>
+  </h2>
+  {subtitle && <p class="reveal mt-4 text-white/65" data-delay="0.1">{subtitle}</p>}
+</div>

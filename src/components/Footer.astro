@@ -1,0 +1,104 @@
+---
+// Global footer (spec §4.7).
+import { site, navLinks } from '../data/site.js';
+import { services } from '../data/services.js';
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+
+const year = new Date().getFullYear();
+const socials = [
+  { name: 'LinkedIn', href: site.socials.linkedin, icon: 'linkedin' },
+  { name: 'Instagram', href: site.socials.instagram, icon: 'instagram' },
+  { name: 'Facebook', href: site.socials.facebook, icon: 'facebook' },
+];
+---
+<footer class="border-t border-white/10 bg-ink-950">
+  <div class="container-x grid gap-10 py-16 md:grid-cols-2 lg:grid-cols-4">
+    <!-- Brand -->
+    <div class="lg:pr-6">
+      <Logo class="text-lg" />
+      <p class="mt-4 max-w-xs text-sm text-white/60">{site.tagline}</p>
+      <div class="mt-6 flex gap-3">
+        {
+          socials.map((s) => (
+            <a
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`bRIDGIN' on ${s.name}`}
+              class="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-all duration-300 hover:scale-110 hover:border-cyan hover:bg-cyan hover:text-ink-950 hover:shadow-glow"
+            >
+              <Icon name={s.icon} class="h-5 w-5" />
+            </a>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Quick links -->
+    <div>
+      <h3 class="text-sm font-semibold uppercase tracking-widest text-cyan">Quick Links</h3>
+      <ul class="mt-4 space-y-2.5">
+        {
+          navLinks.map((l) => (
+            <li>
+              <a href={l.href} class="text-sm text-white/70 hover:text-cyan">
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Services -->
+    <div>
+      <h3 class="text-sm font-semibold uppercase tracking-widest text-cyan">Services</h3>
+      <ul class="mt-4 grid grid-cols-1 gap-2.5">
+        {
+          services.map((s) => (
+            <li>
+              <a href={`/services/${s.slug}`} class="text-sm text-white/70 hover:text-cyan">
+                {s.name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <h3 class="text-sm font-semibold uppercase tracking-widest text-cyan">Get in Touch</h3>
+      <ul class="mt-4 space-y-3 text-sm text-white/70">
+        <li>
+          <a href={site.phoneHref} class="flex items-center gap-2 hover:text-cyan">
+            <Icon name="phone" class="h-4 w-4 text-cyan" />
+            {site.phone}
+          </a>
+        </li>
+        <li>
+          <a href={`mailto:${site.email}`} class="flex items-center gap-2 hover:text-cyan">
+            <Icon name="mail" class="h-4 w-4 text-cyan" />
+            {site.email}
+          </a>
+        </li>
+        <li class="flex items-start gap-2">
+          <Icon name="pin" class="mt-0.5 h-4 w-4 shrink-0 text-cyan" />
+          <span>{site.address}</span>
+        </li>
+      </ul>
+      <a href="/contact-us" class="btn-outline mt-5 text-xs">Get a Free Consultation</a>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="container-x flex flex-col items-center justify-between gap-3 py-5 text-xs text-white/50 sm:flex-row">
+      <p>© {year} {site.legalName}. All rights reserved.</p>
+      <div class="flex gap-5">
+        <a href="/privacy-policy" class="hover:text-cyan">Privacy Policy</a>
+        <a href="/terms" class="hover:text-cyan">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+<BaseLayout
+  title="Privacy Policy | bRIDGIN' Marketing"
+  description="Privacy Policy for bRIDGIN' Marketing Services."
+  noindex
+>
+  <PageHeader eyebrow="Legal" title="Privacy Policy" />
+  <section class="section-y bg-ink-900">
+    <div class="container-x blog-prose max-w-3xl">
+      <p class="rounded-xl border border-cyan/15 bg-cyan/5 px-4 py-3 text-sm text-white/60">
+        <strong>Placeholder document.</strong> Replace this with a lawyer-reviewed Privacy Policy before launch.
+      </p>
+      <h2>1. Introduction</h2>
+      <p>This Privacy Policy explains how bRIDGIN' Marketing Services ("we", "us") collects, uses and protects information you provide through this website.</p>
+      <h2>2. Information We Collect</h2>
+      <p>We may collect your name, email, phone number and message when you submit our contact form, as well as standard analytics data such as pages visited and device type.</p>
+      <h2>3. How We Use Information</h2>
+      <p>We use your information to respond to enquiries, provide our services, and improve our website. We do not sell your personal data.</p>
+      <h2>4. Cookies &amp; Analytics</h2>
+      <p>We may use cookies and third-party analytics to understand how visitors use our site. You can control cookies through your browser settings.</p>
+      <h2>5. Contact</h2>
+      <p>For any privacy questions, contact us via the details on our <a href="/contact-us">Contact page</a>.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  .blog-prose h2 { color:#fff; font-family:'Space Grotesk',sans-serif; font-size:1.4rem; font-weight:700; margin-top:2rem; margin-bottom:.5rem; }
+  .blog-prose p { color:rgba(255,255,255,.72); margin:.75rem 0; line-height:1.7; }
+  .blog-prose a { color:#00e5ff; text-decoration:underline; }
+</style>

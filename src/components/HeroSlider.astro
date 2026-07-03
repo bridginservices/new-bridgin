@@ -1,0 +1,127 @@
+---
+// Auto-sliding hero banner (spec §4.1) — Swiper, 5s autoplay,
+// fade transition, pause-on-hover, swipeable. First image eager,
+// rest lazy. Each slide wrapped in <figure> with sr-only caption
+// so alt/title carry on-page SEO weight.
+import { Image } from 'astro:assets';
+import { heroSlides } from '../data/hero.js';
+import { img } from '../utils/images.js';
+import Icon from './Icon.astro';
+---
+<section class="relative h-[100svh] min-h-[600px] w-full overflow-hidden bg-ink-950" aria-label="Featured client success stories">
+  <div class="swiper hero-swiper h-full w-full">
+    <div class="swiper-wrapper">
+      {
+        heroSlides.map((slide, i) => (
+          <div class="swiper-slide relative">
+            <figure class="absolute inset-0 m-0">
+              <Image
+                src={img(slide.image)}
+                alt={slide.alt}
+                title={slide.title}
+                widths={[768, 1280, 1920]}
+                sizes="100vw"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                fetchpriority={i === 0 ? 'high' : 'auto'}
+                class="h-full w-full object-cover"
+              />
+              {/* Gradient overlay for text legibility */}
+              <div class="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/70 to-ink-950/30"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-ink-950/80 to-transparent"></div>
+              <figcaption class="sr-only">{slide.caption}</figcaption>
+            </figure>
+
+            <div class="container-x relative flex h-full items-center">
+              <div class="max-w-2xl pb-10 pt-24">
+                <p class="eyebrow" data-hero-el>Digital Marketing that Multiplies</p>
+                <h1 class="hero-headline text-4xl font-bold leading-[1.05] text-white sm:text-5xl lg:text-6xl" data-hero-el>
+                  {slide.headline}
+                </h1>
+                <div class="mt-8 flex flex-wrap gap-4" data-hero-el>
+                  <a href="/services" class="btn-primary">
+                    Our Services <Icon name="arrow" class="h-4 w-4" />
+                  </a>
+                  <a href="/contact-us" class="btn-outline">Contact Us</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Controls -->
+    <div class="hero-pagination absolute bottom-8 left-0 right-0 z-10 flex justify-center gap-2"></div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="pointer-events-none absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 animate-floaty text-cyan/70 md:block">
+    <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+  </div>
+</section>
+
+<style>
+  .hero-swiper :global(.swiper-slide) {
+    opacity: 0 !important;
+    transition: opacity 1s ease;
+  }
+  .hero-swiper :global(.swiper-slide-active) {
+    opacity: 1 !important;
+  }
+  .hero-pagination :global(.swiper-pagination-bullet) {
+    width: 28px;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.35);
+    opacity: 1;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .hero-pagination :global(.swiper-pagination-bullet-active) {
+    background: #00e5ff;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.7);
+    width: 44px;
+  }
+</style>
+
+<script>
+  import Swiper from 'swiper';
+  import { Autoplay, EffectFade, Pagination, Keyboard } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/effect-fade';
+  import { gsap } from 'gsap';
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const animateSlide = (slideEl: Element) => {
+    if (reduce) return;
+    const els = slideEl.querySelectorAll('[data-hero-el]');
+    gsap.fromTo(
+      els,
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, stagger: 0.12, ease: 'power3.out' }
+    );
+  };
+
+  const swiper = new Swiper('.hero-swiper', {
+    modules: [Autoplay, EffectFade, Pagination, Keyboard],
+    effect: 'fade',
+    fadeEffect: { crossFade: true },
+    loop: true,
+    speed: 900,
+    autoplay: reduce
+      ? false
+      : { delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true },
+    keyboard: { enabled: true },
+    pagination: {
+      el: '.hero-pagination',
+      clickable: true,
+      bulletElement: 'button',
+    },
+    a11y: { enabled: true },
+    on: {
+      init: (s) => animateSlide(s.slides[s.activeIndex]),
+      slideChangeTransitionStart: (s) => animateSlide(s.slides[s.activeIndex]),
+    },
+  });
+</script>

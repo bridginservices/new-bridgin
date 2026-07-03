@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CTASection from '../components/CTASection.astro';
+import Icon from '../components/Icon.astro';
+import { Image } from 'astro:assets';
+import { img } from '../utils/images.js';
+
+const values = [
+  { icon: 'spark', title: 'Innovation', text: 'We chase better ideas relentlessly, blending fresh thinking with proven strategy to keep your brand ahead.' },
+  { icon: 'palette', title: 'Creativity', text: 'Design and storytelling that stop the scroll — creative work built to be remembered and to convert.' },
+  { icon: 'shield', title: 'Transparency', text: 'Honest reporting, clear communication and no hidden numbers. You always know exactly where you stand.' },
+  { icon: 'chart', title: 'Growth', text: 'Every decision is measured against one question: does it move your business forward, measurably?' },
+];
+
+const steps = [
+  { n: '01', title: 'Discover', text: 'We dig into your business, market and goals to understand what real growth looks like for you.' },
+  { n: '02', title: 'Strategize', text: 'We build a data-driven, full-funnel plan mapped to your budget and priorities — no guesswork.' },
+  { n: '03', title: 'Execute', text: 'Our team ships the work — sites, campaigns, content and creative — with speed and craft.' },
+  { n: '04', title: 'Optimize', text: 'We measure, report transparently and refine relentlessly to compound your results over time.' },
+];
+---
+<BaseLayout
+  title="About Us — bRIDGIN' Marketing Services"
+  description="The bRIDGIN' story: born from a lay off, built into a growth partner for local businesses. Our mission, vision, values and how we work."
+>
+  <PageHeader
+    eyebrow="About bRIDGIN'"
+    title="From Setback to Success Stories"
+    subtitle="We turn life's biggest obstacles into opportunities — for ourselves, and for every brand we partner with."
+  />
+
+  <!-- Story -->
+  <section class="section-y bg-ink-900">
+    <div class="container-x grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div class="reveal relative order-2 lg:order-1">
+        <div class="glow-blob pointer-events-none absolute -inset-6 -z-10"></div>
+        <figure class="m-0 overflow-hidden rounded-3xl border border-white/10">
+          <Image
+            src={img('story-bridge.jpg')}
+            alt="Symbolic bridge representing bRIDGIN' Marketing's journey from setback to success"
+            title="Our Story — bRIDGIN' Marketing Services"
+            widths={[500, 800]}
+            sizes="(max-width: 1024px) 100vw, 45vw"
+            loading="lazy"
+            class="aspect-[4/5] w-full object-cover"
+          />
+        </figure>
+      </div>
+      <div class="order-1 lg:order-2">
+        <p class="eyebrow">Our Story</p>
+        <h2 class="reveal text-3xl font-bold sm:text-4xl">Built from a <span class="heading-accent">LAY OFF</span>.</h2>
+        <div class="mt-6 space-y-5 text-[15px] leading-relaxed text-white/70">
+          <p class="reveal" data-delay="0.05">
+            "The journey of bRIDGIN' started from a LAY OFF... but what seemed like an ending became the foundation of a
+            bigger purpose. Instead of accepting setbacks, we chose to create opportunities, not just for ourselves, but
+            for businesses and aspiring professionals. Every challenge taught us resilience, every project strengthened
+            our expertise, and every client relationship reinforced our commitment to delivering meaningful results."
+          </p>
+          <p class="reveal" data-delay="0.1">
+            "Today, bRIDGIN' stands for innovation, creativity, transparency, and growth. We don't believe in simply
+            providing services; we believe in building lasting partnerships, solving real business problems, and helping
+            brands bridge the gap between vision and success. Our story is proof that determination, trust, and
+            consistent execution can transform life's biggest obstacles into opportunities that inspire others."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="section-y bg-ink-950">
+    <div class="container-x grid gap-6 md:grid-cols-2">
+      <div class="reveal surface p-8">
+        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan/10 text-cyan"><Icon name="target" class="h-6 w-6" /></div>
+        <h2 class="mt-5 text-2xl font-bold text-white">Our Mission</h2>
+        <p class="mt-3 text-white/70">
+          To bridge the gap between where a business is and where it deserves to be — delivering honest, data-driven
+          digital marketing that turns local brands into recognised, thriving success stories.
+        </p>
+      </div>
+      <div class="reveal surface p-8" data-delay="0.1">
+        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan/10 text-cyan"><Icon name="spark" class="h-6 w-6" /></div>
+        <h2 class="mt-5 text-2xl font-bold text-white">Our Vision</h2>
+        <p class="mt-3 text-white/70">
+          To become the most trusted growth partner for ambitious local businesses — proving that with creativity,
+          transparency and relentless execution, any brand can bridge its way to digital success.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section-y bg-ink-900">
+    <div class="container-x">
+      <SectionHeading eyebrow="What We Stand For" title="Our Core Values" center />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {values.map((v, i) => (
+          <article class="reveal surface surface-hover group p-6" data-delay={(i % 4) * 0.08}>
+            <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-cyan/10 text-cyan transition-all group-hover:bg-cyan group-hover:text-ink-950 group-hover:shadow-glow">
+              <Icon name={v.icon} class="h-6 w-6" />
+            </div>
+            <h3 class="mt-4 text-lg font-semibold text-white group-hover:text-cyan">{v.title}</h3>
+            <p class="mt-2 text-sm text-white/65">{v.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How we work -->
+  <section class="section-y bg-ink-950">
+    <div class="container-x">
+      <SectionHeading eyebrow="How We Work" title="A Simple, Transparent Process" center />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s, i) => (
+          <div class="reveal relative surface p-6" data-delay={(i % 4) * 0.08}>
+            <span class="font-heading text-4xl font-bold text-cyan/20">{s.n}</span>
+            <h3 class="mt-2 text-lg font-semibold text-white">{s.title}</h3>
+            <p class="mt-2 text-sm text-white/65">{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    headline="Let's Write Your Success Story Next."
+    subline="Book a free consultation and see how bRIDGIN' can bridge your business to its next stage of growth."
+    secondaryLabel="See Our Work"
+  />
+</BaseLayout>

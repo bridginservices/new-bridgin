@@ -1,0 +1,108 @@
+---
+// Base layout — <head>, fonts, nav, footer, and global scroll reveals.
+import '../styles/global.css';
+import SEO from '../components/SEO.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  /** Hero pages start with a transparent header over dark imagery. */
+  transparentHeader?: boolean;
+}
+const { title, description, ogImage, type, noindex } = Astro.props;
+---
+<!doctype html>
+<html lang="en" class="no-js scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Fonts: Space Grotesk (headings) + Inter (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <SEO title={title} description={description} ogImage={ogImage} type={type} noindex={noindex} />
+
+    <!-- Swap no-js -> js as early as possible for progressive enhancement -->
+    <script is:inline>
+      document.documentElement.classList.remove('no-js');
+      document.documentElement.classList.add('js');
+    </script>
+
+    <!-- JSON-LD organization schema -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'ProfessionalService',
+      name: "bRIDGIN' Marketing Services",
+      description: description,
+      url: Astro.site?.href,
+      areaServed: 'IN',
+      sameAs: [
+        'https://www.linkedin.com/company/bridgin-marketing/',
+        'https://www.instagram.com/bridgin__marketing',
+        'https://www.facebook.com/share/1Gaf5nYbwR/',
+      ],
+    })} />
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-cyan focus:px-4 focus:py-2 focus:font-semibold focus:text-ink-950"
+    >
+      Skip to content
+    </a>
+
+    <Navbar />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Global scroll-reveal: reveals .reveal elements on scroll.
+         Uses GSAP ScrollTrigger when available, with an
+         IntersectionObserver fallback, and respects reduced motion. -->
+    <script>
+      import { gsap } from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const els = Array.from(document.querySelectorAll<HTMLElement>('.reveal'));
+
+      if (reduce) {
+        els.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        gsap.registerPlugin(ScrollTrigger);
+        els.forEach((el) => {
+          const delay = parseFloat(el.dataset.delay || '0');
+          ScrollTrigger.create({
+            trigger: el,
+            start: 'top 88%',
+            once: true,
+            onEnter: () =>
+              gsap.to(el, {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                delay,
+                ease: 'power2.out',
+                onStart: () => el.classList.add('is-visible'),
+              }),
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

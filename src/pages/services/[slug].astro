@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import CTASection from '../../components/CTASection.astro';
+import Icon from '../../components/Icon.astro';
+import { services, getService } from '../../data/services.js';
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
+}
+
+const { service } = Astro.props;
+// Related services = next 3 in the list (wrapping around).
+const idx = services.findIndex((s) => s.slug === service.slug);
+const related = [1, 2, 3].map((o) => services[(idx + o) % services.length]);
+---
+<BaseLayout
+  title={`${service.name} Services | bRIDGIN' Marketing`}
+  description={service.excerpt}
+>
+  <PageHeader eyebrow="Service" title={service.name} subtitle={service.tagline} />
+
+  <section class="section-y bg-ink-900">
+    <div class="container-x grid gap-12 lg:grid-cols-3">
+      <!-- Main -->
+      <div class="lg:col-span-2">
+        <div class="reveal flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan/10 text-cyan shadow-glow">
+          <Icon name={service.icon} class="h-8 w-8" />
+        </div>
+        <h2 class="reveal mt-6 text-2xl font-bold sm:text-3xl">Overview</h2>
+        <p class="reveal mt-4 text-[15px] leading-relaxed text-white/70" data-delay="0.05">{service.description}</p>
+
+        <h2 class="reveal mt-10 text-2xl font-bold">What's Included</h2>
+        <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+          {service.included.map((item) => (
+            <li class="reveal flex items-start gap-3 surface p-4">
+              <span class="mt-0.5 text-cyan"><Icon name="check" class="h-5 w-5" /></span>
+              <span class="text-sm text-white/80">{item}</span>
+            </li>
+          ))}
+        </ul>
+
+        <h2 class="reveal mt-10 text-2xl font-bold">Benefits</h2>
+        <ul class="mt-5 space-y-3">
+          {service.benefits.map((b) => (
+            <li class="reveal flex items-start gap-3">
+              <span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-cyan shadow-glow-sm"></span>
+              <span class="text-white/75">{b}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="lg:col-span-1">
+        <div class="sticky top-24 space-y-6">
+          <div class="surface p-6">
+            <h3 class="text-lg font-semibold text-white">Ready to grow with {service.name}?</h3>
+            <p class="mt-2 text-sm text-white/65">Book a free consultation and get a tailored plan for your business.</p>
+            <a href="/contact-us" class="btn-primary mt-5 w-full">Get a Free Consultation</a>
+            <a href="/services" class="btn-ghost mt-2 w-full">← All Services</a>
+          </div>
+
+          <div class="surface p-6">
+            <h3 class="text-sm font-semibold uppercase tracking-widest text-cyan">Related Services</h3>
+            <ul class="mt-4 space-y-1">
+              {related.map((r) => (
+                <li>
+                  <a href={`/services/${r.slug}`} class="flex items-center gap-2 rounded-lg px-2 py-2 text-sm text-white/75 transition-colors hover:bg-cyan/10 hover:text-cyan">
+                    <Icon name={r.icon} class="h-4 w-4 text-cyan" /> {r.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <CTASection
+    headline={`Let's Put ${service.name} to Work for You.`}
+    subline="Bridge the gap between where your business is and where it deserves to be."
+    secondaryLabel="Explore Our Work"
+  />
+</BaseLayout>

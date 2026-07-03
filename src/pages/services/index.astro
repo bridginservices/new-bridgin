@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CTASection from '../../components/CTASection.astro';
+import { services } from '../../data/services.js';
+---
+<BaseLayout
+  title="Services — SEO, Ads, Social, Web, App & Branding | bRIDGIN'"
+  description="Explore bRIDGIN's 10 digital marketing services: SEO, performance marketing, social media, content, Google My Business, web & app development, product & graphic design, and branding."
+>
+  <PageHeader
+    eyebrow="Our Services"
+    title="Everything Your Brand Needs to Grow"
+    subtitle="One full-funnel team covering strategy, creative, technology and performance — from first impression to loyal customer."
+  />
+
+  <section class="section-y bg-ink-900">
+    <div class="container-x">
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((s, i) => <ServiceCard service={s} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    headline="Not Sure Where to Start? Let's Talk."
+    subline="Tell us your goals and we'll recommend the right mix of services to get you there."
+    primaryLabel="Get a Free Consultation"
+    secondaryLabel="View Our Work"
+  />
+</BaseLayout>
