@@ -1,20 +1,27 @@
 ---
-// Text-based wordmark lockup for bRIDGIN' (white + cyan) with a
-// small bridge glyph tying into the brand metaphor. No raster asset.
+// bRIDGIN' logo lockup — official "b'" mark (public/logo-mark.png,
+// transparent PNG supplied by the brand) + wordmark in brand blue.
 interface Props {
   class?: string;
+  /** Show only the mark (no wordmark text). */
+  markOnly?: boolean;
 }
-const { class: className = '' } = Astro.props;
+const { class: className = '', markOnly = false } = Astro.props;
 ---
-<span class={`inline-flex items-center gap-2 font-heading font-bold ${className}`} aria-label="bRIDGIN' Marketing Services home">
-  <!-- Bridge glyph -->
-  <svg class="h-6 w-6 text-cyan drop-shadow-glow" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-    <path d="M2 22h28" />
-    <path d="M4 22c0-7 8-7 8 0M12 22c0-9 8-9 8 0M20 22c0-7 8-7 8 0" opacity="0.9" />
-    <line x1="6" y1="22" x2="6" y2="26" />
-    <line x1="26" y1="22" x2="26" y2="26" />
-  </svg>
-  <span class="text-xl tracking-tight text-white">
-    b<span class="text-cyan">RIDGIN</span><span class="text-cyan">'</span>
-  </span>
+<span class={`inline-flex items-center gap-2.5 font-heading font-bold ${className}`} aria-label="bRIDGIN' Marketing Services home">
+  <!-- Official b' mark (transparent) -->
+  <img
+    src="/logo-mark.png"
+    alt="bRIDGIN'"
+    width="146"
+    height="240"
+    class="h-7 w-auto"
+    loading="eager"
+    decoding="async"
+  />
+  {!markOnly && (
+    <span class="text-xl tracking-tight text-white">
+      b<span class="text-[#37C1F0]">RIDGIN</span><span class="text-[#37C1F0]">'</span>
+    </span>
+  )}
 </span>

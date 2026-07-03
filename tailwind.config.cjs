@@ -14,9 +14,9 @@ module.exports = {
         },
         cyan: {
           // Single accessible cyan used consistently for accents/headings/links
-          DEFAULT: '#00E5FF',
-          bright: '#22ECFF',
-          deep: '#00B8CC',
+          DEFAULT: '#37C1F0',
+          bright: '#63CFF5',
+          deep: '#1AA0D6',
         },
         offwhite: '#F2F2F2',
       },
@@ -26,17 +26,17 @@ module.exports = {
         body: ['Inter', 'Manrope', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        glow: '0 0 20px rgba(0, 229, 255, 0.35)',
-        'glow-lg': '0 0 40px rgba(0, 229, 255, 0.45)',
-        'glow-sm': '0 0 12px rgba(0, 229, 255, 0.30)',
+        glow: '0 0 20px rgba(55, 193, 240, 0.35)',
+        'glow-lg': '0 0 40px rgba(55, 193, 240, 0.45)',
+        'glow-sm': '0 0 12px rgba(55, 193, 240, 0.30)',
       },
       dropShadow: {
-        glow: '0 0 10px rgba(0, 229, 255, 0.55)',
+        glow: '0 0 10px rgba(55, 193, 240, 0.55)',
       },
       keyframes: {
         pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 0 0 rgba(0,229,255,0.55)' },
-          '50%': { boxShadow: '0 0 22px 6px rgba(0,229,255,0.20)' },
+          '0%, 100%': { boxShadow: '0 0 0 0 rgba(55, 193, 240,0.55)' },
+          '50%': { boxShadow: '0 0 22px 6px rgba(55, 193, 240,0.20)' },
         },
         floaty: {
           '0%, 100%': { transform: 'translateY(0)' },
