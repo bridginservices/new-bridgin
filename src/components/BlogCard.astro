@@ -4,7 +4,7 @@ import { img } from '../utils/images.js';
 import Icon from './Icon.astro';
 interface Props {
   post: {
-    slug: string;
+    id: string;
     data: {
       title: string;
       description: string;
@@ -26,7 +26,7 @@ const dateStr = data.pubDate.toLocaleDateString('en-US', {
 });
 ---
 <article class="reveal group surface overflow-hidden surface-hover flex flex-col" data-delay={(index % 3) * 0.08}>
-  <a href={`/blogs/${post.slug}`} class="block">
+  <a href={`/blogs/${post.id}`} class="block">
     <figure class="relative m-0 aspect-[16/9] overflow-hidden">
       <Image
         src={img(data.image)}
@@ -48,10 +48,10 @@ const dateStr = data.pubDate.toLocaleDateString('en-US', {
       <span class="inline-flex items-center gap-1"><Icon name="clock" class="h-3.5 w-3.5" /> {data.readTime}</span>
     </div>
     <h3 class="mt-3 text-lg font-semibold leading-snug text-white group-hover:text-cyan">
-      <a href={`/blogs/${post.slug}`}>{data.title}</a>
+      <a href={`/blogs/${post.id}`}>{data.title}</a>
     </h3>
     <p class="mt-2 flex-1 text-sm leading-relaxed text-white/60">{data.description}</p>
-    <a href={`/blogs/${post.slug}`} class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-cyan">
+    <a href={`/blogs/${post.id}`} class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-cyan">
       Read article <Icon name="arrow" class="h-4 w-4" />
     </a>
   </div>
