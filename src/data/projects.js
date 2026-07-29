@@ -9,9 +9,10 @@ export const projects = [
     slug: 'veer-furnitech',
     client: 'Veer Furnitech',
     category: 'Furniture Retail',
-    image: 'project-veer-furnitech.jpg',
-    alt: "Veer Furnitech website and mobile experience built by bRIDGIN' Marketing",
+    image: 'project-veer-furnitech-logo.png',
+    alt: "Veer Furnitech brand logo — website & SEO client of bRIDGIN' Marketing",
     title: "Veer Furnitech — Website & SEO by bRIDGIN'",
+    logo: true,
     services: [
       'Website Development',
       'Complete SEO',
@@ -22,7 +23,6 @@ export const projects = [
     result:
       'A premium new website plus first-page rankings for key products and a social presence that finally matches the brand.',
     metric: 'First-page rankings',
-    placeholder: true,
   },
   {
     slug: 'maharani-rental-clothing',

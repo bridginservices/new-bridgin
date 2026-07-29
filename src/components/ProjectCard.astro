@@ -13,13 +13,15 @@ interface Props {
     result: string;
     metric: string;
     placeholder?: boolean;
+    /** Show a brand logo (contained on white) instead of a photo. */
+    logo?: boolean;
   };
   index?: number;
 }
 const { project, index = 0 } = Astro.props;
 ---
 <article class="reveal group surface overflow-hidden surface-hover" data-delay={(index % 2) * 0.1}>
-  <figure class="relative m-0 aspect-[16/10] overflow-hidden">
+  <figure class:list={["relative m-0 aspect-[16/10] overflow-hidden", project.logo && "bg-white"]}>
     <Image
       src={img(project.image)}
       alt={project.alt}
@@ -27,9 +29,14 @@ const { project, index = 0 } = Astro.props;
       widths={[480, 800]}
       sizes="(max-width: 768px) 100vw, 50vw"
       loading="lazy"
-      class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+      class:list={[
+        "h-full w-full transition-transform duration-700 group-hover:scale-105",
+        project.logo ? "object-contain p-6" : "object-cover",
+      ]}
     />
-    <div class="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/30 to-transparent"></div>
+    {!project.logo && (
+      <div class="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/30 to-transparent"></div>
+    )}
     <span class="absolute left-4 top-4 rounded-full border border-cyan/30 bg-ink-950/70 px-3 py-1 text-xs text-cyan">
       {project.category}
     </span>
