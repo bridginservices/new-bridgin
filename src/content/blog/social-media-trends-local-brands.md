@@ -7,10 +7,7 @@ image: "blog-social-trends.jpg"
 imageAlt: "Smartphone showing social media content for a local brand"
 readTime: "5 min read"
 tags: ["Social Media", "Content Marketing", "Local Brands"]
-placeholder: true
 ---
-
-> **Placeholder post** — starter content to be reviewed and replaced with original, brand-approved writing before launch.
 
 Social media moves fast, but for **local brands** the winning principles in 2026 are surprisingly consistent: show up authentically, speak to your neighbourhood, and lead with video. Here are the trends worth your attention.
 
@@ -49,4 +46,4 @@ A small, engaged local audience is worth more than a big, passive one. Reply to 
 
 For local brands, social media in 2026 isn't about chasing every trend. It's about consistent, authentic, community-focused content — with short-form video leading the way.
 
-*Want a social presence that actually represents your brand? [Let's talk](/contact-us).*
+*Want a social presence that actually represents your brand? [Let's talk](/contact-us) or explore our [social media management services](/services/social-media-management).*

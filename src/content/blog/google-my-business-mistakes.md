@@ -7,10 +7,7 @@ image: "blog-gmb.jpg"
 imageAlt: "Smartphone showing a map location, representing a Google Business Profile"
 readTime: "6 min read"
 tags: ["Google My Business", "Local SEO", "Small Business"]
-placeholder: true
 ---
-
-> **Placeholder post** — starter content to be reviewed and replaced with original, brand-approved writing before launch.
 
 For a local business, your **Google Business Profile** (formerly Google My Business) is often the very first impression a customer gets — long before they visit your website. Yet it's also the most neglected asset in local marketing. Here are five mistakes we see constantly, and how to fix each one.
 
@@ -55,4 +52,4 @@ Your **Name, Address and Phone number** must match everywhere online. Inconsiste
 
 Your GMB profile is free real estate at the top of local search. Fixing these five mistakes can meaningfully increase calls, direction requests and walk-ins — often within weeks.
 
-*Want us to audit and manage your Google Business Profile? [Get a free consultation](/contact-us).*
+*Want us to audit and manage your Google Business Profile? [Get a free consultation](/contact-us) or explore our [Google My Business services](/services/google-my-business).*
