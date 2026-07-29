@@ -13,6 +13,10 @@ export const site = {
   phone: '+91 95955 31212',
   phoneHref: 'tel:+919595531212',
 
+  // WhatsApp: digits only, country code first (used for the wa.me link).
+  whatsapp: '919595531212',
+  whatsappMessage: "Hi bRIDGIN'! I'd like to know more about your digital marketing services.",
+
   email: 'bridginservices@gmail.com',
 
   address: 'Nagpur, Maharashtra, India',

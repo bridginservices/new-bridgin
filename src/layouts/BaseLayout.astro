@@ -4,6 +4,7 @@ import '../styles/global.css';
 import SEO from '../components/SEO.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 
 interface Props {
   title: string;
@@ -70,6 +71,8 @@ const { title, description, ogImage, type, noindex } = Astro.props;
     </main>
 
     <Footer />
+
+    <WhatsAppButton />
 
     <!-- Global scroll-reveal: reveals .reveal elements on scroll.
          Uses GSAP ScrollTrigger when available, with an
