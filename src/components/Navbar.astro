@@ -42,7 +42,7 @@ const isActive = (href: string) =>
             </a>
             {link.label === 'Services' && (
               <div class="invisible absolute left-1/2 top-full w-64 -translate-x-1/2 pt-3 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                <div class="surface grid grid-cols-1 gap-0.5 p-2 shadow-glow-sm">
+                <div class="grid grid-cols-1 gap-0.5 rounded-2xl border border-white/10 bg-ink-900 p-2 shadow-xl shadow-black/50 ring-1 ring-black/40">
                   {services.map((s) => (
                     <a
                       href={`/services/${s.slug}`}
