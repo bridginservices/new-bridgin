@@ -5,22 +5,27 @@ interface Props {
   class?: string;
   /** Show only the mark (no wordmark text). */
   markOnly?: boolean;
+  /** Stack the wordmark vertically below the mark instead of beside it. */
+  stacked?: boolean;
 }
-const { class: className = '', markOnly = false } = Astro.props;
+const { class: className = '', markOnly = false, stacked = false } = Astro.props;
+const layout = stacked
+  ? 'inline-flex flex-col items-center gap-1'
+  : 'inline-flex items-center gap-2.5';
 ---
-<span class={`inline-flex items-center gap-2.5 font-heading font-bold ${className}`} aria-label="bRIDGIN' Marketing Services home">
+<span class={`${layout} font-heading font-bold ${className}`} aria-label="bRIDGIN' Marketing Services home">
   <!-- Official b' mark (transparent) -->
   <img
     src="/logo-mark.png"
     alt="bRIDGIN'"
     width="146"
     height="240"
-    class="h-7 w-auto"
+    class={stacked ? 'h-8 w-auto' : 'h-7 w-auto'}
     loading="eager"
     decoding="async"
   />
-  {!markOnly && (
-    <span class="text-xl tracking-tight text-white">
+  {(!markOnly || stacked) && (
+    <span class={`tracking-tight text-white ${stacked ? 'text-sm leading-none' : 'text-xl'}`}>
       b<span class="text-[#37C1F0]">RIDGIN</span><span class="text-[#37C1F0]">'</span>
     </span>
   )}
