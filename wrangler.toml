@@ -1,0 +1,10 @@
+# Cloudflare Workers config — deploys the static Astro build (dist/)
+# as a static-assets-only Worker. Used by the "npx wrangler deploy"
+# step in the new-bridgin Cloudflare build pipeline.
+name = "new-bridgin"
+compatibility_date = "2024-11-01"
+
+[assets]
+directory = "./dist"
+# Serve the built 404 page for unknown paths.
+not_found_handling = "404-page"
