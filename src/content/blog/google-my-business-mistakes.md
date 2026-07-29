@@ -4,7 +4,7 @@ description: "Your Google Business Profile is often a customer's first impressio
 pubDate: 2026-05-12
 author: "bRIDGIN' Team"
 image: "blog-gmb.jpg"
-imageAlt: "Local storefront representing a well-optimized Google Business Profile"
+imageAlt: "Smartphone showing a map location, representing a Google Business Profile"
 readTime: "6 min read"
 tags: ["Google My Business", "Local SEO", "Small Business"]
 placeholder: true

@@ -10,7 +10,7 @@ export const projects = [
     client: 'Veer Furnitech',
     category: 'Furniture Retail',
     image: 'project-veer-furnitech.jpg',
-    alt: "Veer Furnitech premium furniture showroom website by bRIDGIN' Marketing",
+    alt: "Veer Furnitech website and mobile experience built by bRIDGIN' Marketing",
     title: "Veer Furnitech — Website & SEO by bRIDGIN'",
     services: [
       'Website Development',

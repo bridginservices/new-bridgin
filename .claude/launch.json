@@ -6,6 +6,12 @@
       "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
       "runtimeArgs": ["node_modules/astro/astro.js", "dev", "--host"],
       "port": 4321
+    },
+    {
+      "name": "tableserve",
+      "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "runtimeArgs": ["C:\\Users\\Atharva\\Desktop\\Projects\\TableServe\\server.mjs"],
+      "port": 4173
     }
   ]
 }

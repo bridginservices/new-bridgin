@@ -10,19 +10,16 @@ export const site = {
   description:
     "bRIDGIN' Marketing Services is a digital marketing agency helping local businesses grow online with SEO, performance marketing, social media, web & app development, and branding.",
 
-  // ⚠️ PLACEHOLDER — replace with the real phone number before launch.
-  phone: '+91 00000 00000',
-  phoneHref: 'tel:+910000000000',
+  phone: '+91 95955 31212',
+  phoneHref: 'tel:+919595531212',
 
-  // ⚠️ PLACEHOLDER — replace with the real business email before launch.
-  email: 'hello@bridginmarketing.com',
+  email: 'bridginservices@gmail.com',
 
-  // ⚠️ PLACEHOLDER — replace with the real physical address before launch.
-  address: '123 Placeholder Street, City, State 000000, India',
+  address: 'Nagpur, Maharashtra, India',
 
-  // ⚠️ PLACEHOLDER — Google Maps embed src. Replace with the real pin.
+  // Google Maps embed src. Replace with an exact business pin when available.
   mapEmbedSrc:
-    'https://www.google.com/maps?q=Mumbai%2C%20India&output=embed',
+    'https://www.google.com/maps?q=Nagpur%2C%20Maharashtra%2C%20India&output=embed',
 
   socials: {
     linkedin: 'https://www.linkedin.com/company/bridgin-marketing/',

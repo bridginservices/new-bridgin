@@ -4,10 +4,11 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import mdx from '@astrojs/mdx';
 
-// NOTE: Update `site` to the real production domain before launch.
-// It is used for canonical URLs, sitemap.xml and Open Graph absolute URLs.
+// `site` is the canonical production origin. Used for canonical URLs,
+// sitemap.xml and Open Graph absolute URLs. Keep `www` canonical and
+// redirect the bare apex (bridginmarketing.com) to www in Cloudflare.
 export default defineConfig({
-  site: 'https://bridginmarketing.com',
+  site: 'https://www.bridginmarketing.com',
   integrations: [
     tailwind({ applyBaseStyles: false }),
     sitemap(),

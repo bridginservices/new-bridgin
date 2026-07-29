@@ -1,40 +1,39 @@
 // ============================================================
 // Home hero slider slides (spec §4.1).
-// Narrative: a local business "growing digitally" with bRIDGIN'.
-// alt/title carry SEO weight — descriptive, not stuffed.
+// Digital-marketing imagery; alt/title carry SEO weight.
 // ============================================================
 
 export const heroSlides = [
   {
     image: 'hero-furniture-showroom.jpg',
     headline: 'From a Local Shop to a Digital Landmark.',
-    alt: "Local furniture business owner reviewing growing website analytics after digital marketing by bRIDGIN'",
-    title: "Furniture Business Digital Growth — bRIDGIN' Marketing",
+    alt: "Marketing analytics dashboard showing business growth powered by bRIDGIN' digital marketing",
+    title: "Digital Marketing Analytics — bRIDGIN' Marketing",
     caption:
-      "A local furniture showroom scaling its online presence with bRIDGIN' Marketing Services.",
+      "Data-driven digital marketing that turns local businesses into digital landmarks.",
   },
   {
     image: 'hero-clothing-boutique.jpg',
     headline: "We Don't Just Market Businesses. We Multiply Them.",
-    alt: "Clothing rental business seeing social media growth through bRIDGIN' digital marketing",
-    title: "Social Media Growth Success — bRIDGIN' Marketing",
+    alt: "Social media marketing growing a local brand's audience with bRIDGIN'",
+    title: "Social Media Marketing — bRIDGIN' Marketing",
     caption:
-      "A clothing boutique trending on social media thanks to bRIDGIN' Marketing Services.",
+      "Social media strategies that multiply a local brand's reach and revenue.",
   },
   {
     image: 'hero-safari-park.jpg',
     headline: 'Every Click Is a Customer Waiting to Discover You.',
-    alt: "Jungle safari tourism business growing bookings through bRIDGIN' Facebook ad campaigns",
-    title: "Tourism Business Marketing Success — bRIDGIN'",
+    alt: "Marketing strategy and campaign planning by bRIDGIN' Marketing Services",
+    title: "Marketing Strategy & Campaigns — bRIDGIN'",
     caption:
-      "A jungle safari attraction multiplying bookings with bRIDGIN' performance marketing.",
+      "Targeted campaigns that turn every click into a paying customer.",
   },
   {
     image: 'hero-interior-studio.jpg',
     headline: 'Turning Local Vision Into Digital Success Stories.',
-    alt: "Interior design studio brand transformation by bRIDGIN' Marketing Services",
-    title: "Interior Design Business Growth — bRIDGIN' Marketing",
+    alt: "The bRIDGIN' team turning local business vision into digital success stories",
+    title: "Digital Marketing Agency — bRIDGIN' Marketing",
     caption:
-      "An interior design studio elevating its brand online with bRIDGIN' Marketing Services.",
+      "A full-funnel team turning local vision into digital success stories.",
   },
 ];
