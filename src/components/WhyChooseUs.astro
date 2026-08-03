@@ -29,10 +29,10 @@ const points = [
             class="reveal group surface surface-hover p-7"
             data-delay={(i % 3) * 0.1}
           >
-            <div class="flex h-14 w-14 items-center justify-center rounded-xl bg-cyan/10 text-cyan transition-all duration-300 group-hover:bg-cyan group-hover:text-ink-950 group-hover:shadow-glow">
+            <div class="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan/20 bg-cyan/10 text-cyan transition-all duration-300 group-hover:border-cyan group-hover:bg-cyan group-hover:text-ink-950 group-hover:shadow-glow">
               <Icon name={p.icon} class="h-7 w-7" />
             </div>
-            <h3 class="mt-5 text-xl font-semibold text-white group-hover:text-cyan">{p.title}</h3>
+            <h3 class="mt-5 text-xl font-semibold text-white transition-colors group-hover:text-cyan">{p.title}</h3>
             <p class="mt-2 text-sm leading-relaxed text-white/65">{p.text}</p>
           </article>
         ))

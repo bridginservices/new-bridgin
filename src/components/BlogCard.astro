@@ -51,8 +51,9 @@ const dateStr = data.pubDate.toLocaleDateString('en-US', {
       <a href={`/blogs/${post.id}`}>{data.title}</a>
     </h3>
     <p class="mt-2 flex-1 text-sm leading-relaxed text-white/60">{data.description}</p>
-    <a href={`/blogs/${post.id}`} class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-cyan">
-      Read article <Icon name="arrow" class="h-4 w-4" />
+    <a href={`/blogs/${post.id}`} class="group/read mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-cyan/80 transition-colors hover:text-cyan">
+      Read article
+      <Icon name="arrow" class="h-4 w-4 transition-transform duration-300 group-hover/read:translate-x-1" />
     </a>
   </div>
 </article>

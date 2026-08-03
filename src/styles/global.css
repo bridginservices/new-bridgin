@@ -75,13 +75,27 @@
     @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
   }
 
+  /* Vertical rhythm tiers (8pt system) */
   .section-y {
     @apply py-20 md:py-28;
+  }
+  .section-y-sm {
+    @apply py-14 md:py-20;
+  }
+  .section-y-lg {
+    @apply py-24 md:py-36;
   }
 
   /* Cyan gradient text for hero/section headings */
   .text-gradient-cyan {
     @apply bg-gradient-to-r from-white via-cyan-bright to-cyan bg-clip-text text-transparent;
+  }
+
+  /* Confident section-heading scale (fluid). Hero sets its own larger size. */
+  .text-display {
+    @apply font-heading font-bold leading-[1.08] tracking-tight;
+    font-size: clamp(2rem, 1.35rem + 2.4vw, 3.25rem);
+    text-wrap: balance;
   }
 
   .heading-accent {
@@ -104,7 +118,8 @@
            transition-all duration-300 will-change-transform;
   }
   .btn-primary {
-    @apply btn bg-cyan text-ink-950 shadow-glow hover:scale-[1.04] hover:shadow-glow-lg hover:brightness-110;
+    @apply btn bg-gradient-to-b from-cyan-bright to-cyan text-ink-950 shadow-glow
+           hover:scale-[1.04] hover:shadow-glow-lg hover:brightness-110;
   }
   .btn-outline {
     @apply btn border border-cyan/60 text-cyan hover:scale-[1.04] hover:bg-cyan/10 hover:shadow-glow;
@@ -112,13 +127,44 @@
   .btn-ghost {
     @apply btn text-white/80 hover:text-cyan;
   }
+  /* Larger call-to-action size */
+  .btn-lg {
+    @apply px-8 py-4 text-base;
+  }
 
-  /* Card surface */
+  /* Card surface — layered top-lit sheen + depth shadow */
   .surface {
-    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm;
+    @apply relative rounded-2xl border border-white/10
+           bg-gradient-to-b from-white/[0.055] to-white/[0.015]
+           shadow-card backdrop-blur-sm;
   }
   .surface-hover {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:border-cyan/40 hover:shadow-glow;
+    @apply transition-all duration-300 hover:-translate-y-1 hover:border-cyan/50 hover:shadow-card-hover;
+  }
+  /* Convenience: an interactive card in one class */
+  .card {
+    @apply surface surface-hover;
+  }
+
+  /* Premium gradient hairline border (top accent for cards/sections) */
+  .top-accent {
+    @apply relative;
+  }
+  .top-accent::before {
+    content: '';
+    @apply pointer-events-none absolute inset-x-6 top-0 h-px
+           bg-gradient-to-r from-transparent via-cyan/60 to-transparent;
+  }
+
+  /* Small pill / badge */
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-white/10
+           bg-white/5 px-3 py-1 text-xs font-medium text-white/70;
+  }
+
+  /* Glowing hairline divider */
+  .hairline {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-cyan/40 to-transparent;
   }
 
   /* Faint animated cyan grid background */

@@ -20,20 +20,21 @@ const {
 ---
 <section class="section-y relative overflow-hidden">
   <div class="container-x">
-    <div class="relative overflow-hidden rounded-3xl border border-cyan/20 bg-gradient-to-br from-ink-850 to-ink-950 px-6 py-16 text-center sm:px-12 md:py-20">
+    <div class="top-accent relative overflow-hidden rounded-3xl border border-cyan/25 bg-gradient-to-br from-ink-850 to-ink-950 px-6 py-16 text-center shadow-card ring-1 ring-white/5 sm:px-12 md:py-24">
       <div class="pointer-events-none absolute inset-0 cyber-grid opacity-30 animate-gridDrift"></div>
       <div class="glow-blob pointer-events-none absolute left-1/2 top-0 h-72 w-[36rem] -translate-x-1/2"></div>
+      <div class="glow-blob pointer-events-none absolute bottom-[-6rem] left-1/2 h-64 w-[32rem] -translate-x-1/2 opacity-70"></div>
 
       <div class="relative mx-auto max-w-3xl">
-        <h2 class="reveal text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+        <h2 class="reveal text-3xl font-bold leading-[1.1] sm:text-4xl md:text-5xl">
           <span class="text-gradient-cyan">{headline}</span>
         </h2>
-        <p class="reveal mt-5 text-white/70" data-delay="0.1">{subline}</p>
-        <div class="reveal mt-9 flex flex-wrap justify-center gap-4" data-delay="0.2">
-          <a href={primaryHref} class="btn-primary">
+        <p class="reveal mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/65" data-delay="0.1">{subline}</p>
+        <div class="reveal mt-10 flex flex-wrap justify-center gap-4" data-delay="0.2">
+          <a href={primaryHref} class="btn-primary btn-lg">
             {primaryLabel} <Icon name="arrow" class="h-4 w-4" />
           </a>
-          <a href={secondaryHref} class="btn-outline">{secondaryLabel}</a>
+          <a href={secondaryHref} class="btn-outline btn-lg">{secondaryLabel}</a>
         </div>
       </div>
     </div>
