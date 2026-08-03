@@ -167,6 +167,56 @@
     @apply h-px w-full bg-gradient-to-r from-transparent via-cyan/40 to-transparent;
   }
 
+  /* ── Signature FX ──────────────────────────────────────── */
+
+  /* Cursor spotlight / aurora — a torch of cyan light that follows
+     the pointer and lights up the dark canvas (screen blend). */
+  .cursor-spot {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 640px;
+    width: 640px;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 30;
+    opacity: 0;
+    mix-blend-mode: screen;
+    background: radial-gradient(
+      circle,
+      rgba(55, 193, 240, 0.16) 0%,
+      rgba(55, 193, 240, 0.06) 32%,
+      rgba(55, 193, 240, 0) 62%
+    );
+    transition: opacity 0.5s ease;
+    will-change: transform;
+  }
+
+  /* 3D-tilt card glare — a soft sheen that tracks the cursor across
+     the card surface. Clipped to the card's radius via border-radius. */
+  .card-glare {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    mix-blend-mode: soft-light;
+    background: radial-gradient(
+      circle at var(--gx, 50%) var(--gy, 50%),
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0) 45%
+    );
+    transition: opacity 0.3s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor-spot,
+    .card-glare {
+      display: none;
+    }
+  }
+
   /* Faint animated cyan grid background */
   .cyber-grid {
     background-image:

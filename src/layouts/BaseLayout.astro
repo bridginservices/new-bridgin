@@ -143,6 +143,117 @@ const { title, description, ogImage, type, noindex } = Astro.props;
             },
           });
         });
+
+        const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+        // ── Signature FX #1: cursor spotlight / aurora ───────────────────
+        const spot = document.createElement('div');
+        spot.className = 'cursor-spot';
+        document.body.appendChild(spot);
+        gsap.set(spot, { xPercent: -50, yPercent: -50 });
+        if (finePointer) {
+          const sx = gsap.quickTo(spot, 'x', { duration: 0.5, ease: 'power3.out' });
+          const sy = gsap.quickTo(spot, 'y', { duration: 0.5, ease: 'power3.out' });
+          window.addEventListener(
+            'pointermove',
+            (e) => {
+              sx(e.clientX);
+              sy(e.clientY);
+              spot.style.opacity = '1';
+            },
+            { passive: true }
+          );
+          document.addEventListener('mouseleave', () => (spot.style.opacity = '0'));
+        } else {
+          // Touch / coarse pointer: a slow drifting aurora instead.
+          gsap.set(spot, { x: window.innerWidth * 0.5, y: window.innerHeight * 0.35, opacity: 0.6 });
+          gsap.to(spot, {
+            x: () => window.innerWidth * (0.3 + Math.random() * 0.4),
+            y: () => window.innerHeight * (0.25 + Math.random() * 0.4),
+            duration: 8,
+            ease: 'sine.inOut',
+            repeat: -1,
+            yoyo: true,
+            repeatRefresh: true,
+          });
+        }
+
+        if (finePointer) {
+          // ── Signature FX #2a: magnetic primary CTAs (preset #3) ────────
+          gsap.utils.toArray<HTMLElement>('.btn-primary').forEach((btn) => {
+            // Let GSAP fully own transform; keep colour/shadow transitions.
+            btn.style.transition = 'color .3s, background-color .3s, box-shadow .3s, filter .3s';
+            const mx = gsap.quickTo(btn, 'x', { duration: 0.4, ease: 'elastic.out(1, 0.4)' });
+            const my = gsap.quickTo(btn, 'y', { duration: 0.4, ease: 'elastic.out(1, 0.4)' });
+            btn.addEventListener('pointermove', (e) => {
+              const r = btn.getBoundingClientRect();
+              mx((e.clientX - r.left - r.width / 2) * 0.35);
+              my((e.clientY - r.top - r.height / 2) * 0.6);
+            });
+            btn.addEventListener('pointerleave', () => {
+              mx(0);
+              my(0);
+            });
+          });
+
+          // ── Signature FX #2b: 3D tilt + glare on cards ─────────────────
+          gsap.utils.toArray<HTMLElement>('.surface-hover').forEach((card) => {
+            const glare = document.createElement('span');
+            glare.className = 'card-glare';
+            card.appendChild(glare);
+            const rx = gsap.quickTo(card, 'rotationX', { duration: 0.4, ease: 'power2.out' });
+            const ry = gsap.quickTo(card, 'rotationY', { duration: 0.4, ease: 'power2.out' });
+            card.addEventListener('pointerenter', () =>
+              gsap.set(card, { transformPerspective: 900, transformStyle: 'preserve-3d' })
+            );
+            card.addEventListener('pointermove', (e) => {
+              const r = card.getBoundingClientRect();
+              const px = (e.clientX - r.left) / r.width;
+              const py = (e.clientY - r.top) / r.height;
+              ry((px - 0.5) * 9);
+              rx((0.5 - py) * 9);
+              glare.style.setProperty('--gx', px * 100 + '%');
+              glare.style.setProperty('--gy', py * 100 + '%');
+              glare.style.opacity = '1';
+            });
+            card.addEventListener('pointerleave', () => {
+              rx(0);
+              ry(0);
+              glare.style.opacity = '0';
+            });
+          });
+        }
+
+        // ── Signature FX #3: cyber text decode reveal ────────────────────
+        const glyphs = '!<>-_\\/[]{}—=+*^?#01ABCDEF';
+        const decodeEl = (el: HTMLElement) => {
+          if (el.childElementCount > 0) return; // never scramble elements with markup
+          const text = el.textContent || '';
+          const len = text.length;
+          const total = Math.min(30, 12 + len);
+          let frame = 0;
+          const tick = () => {
+            const revealed = Math.floor((frame / total) * len);
+            let out = '';
+            for (let i = 0; i < len; i++) {
+              if (text[i] === ' ') out += ' ';
+              else if (i < revealed) out += text[i];
+              else out += glyphs[(Math.random() * glyphs.length) | 0];
+            }
+            el.textContent = out;
+            if (frame++ <= total) requestAnimationFrame(tick);
+            else el.textContent = text;
+          };
+          tick();
+        };
+        gsap.utils.toArray<HTMLElement>('[data-decode]').forEach((el) => {
+          ScrollTrigger.create({
+            trigger: el,
+            start: 'top 90%',
+            once: true,
+            onEnter: () => decodeEl(el),
+          });
+        });
       }
     </script>
   </body>

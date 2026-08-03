@@ -1,0 +1,133 @@
+---
+// Signature FX #4 — a bespoke "bridge of light" that draws itself on scroll,
+// thematic to bRIDGIN' bridging brands to digital success. Fully static
+// (pre-drawn) under reduced-motion.
+import SectionHeading from './SectionHeading.astro';
+---
+<section id="bridge-signature" class="section-y-lg relative overflow-hidden bg-ink-950 bg-radial-cyan">
+  <div
+    class="glow-blob pointer-events-none absolute left-1/2 top-10 h-72 w-[42rem] -translate-x-1/2 opacity-60"
+    data-parallax="16"
+    data-parallax-cx="true"
+  ></div>
+
+  <div class="container-x relative">
+    <SectionHeading
+      eyebrow="The bRIDGIN' Promise"
+      title="We Build the Bridge to Your Growth"
+      subtitle="Every span engineered to carry your brand from where it is to where it deserves to be."
+      center
+    />
+
+    <figure class="relative mx-auto mt-14 max-w-5xl">
+      <svg
+        class="w-full"
+        viewBox="0 0 1200 300"
+        role="img"
+        aria-label="An illustrated bridge connecting where your brand is today to where it deserves to be."
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <!-- Deck -->
+        <path class="bridge-draw" d="M40 240 H1160" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" />
+        <!-- Arch span -->
+        <path
+          class="bridge-draw bridge-arch"
+          d="M40 240 C 320 70 880 70 1160 240"
+          pathLength="1"
+          stroke-dasharray="1"
+          stroke-dashoffset="1"
+        />
+        <!-- Suspension struts (arch -> deck) -->
+        <line class="bridge-strut" x1="183" y1="175" x2="183" y2="240" />
+        <line class="bridge-strut" x1="352" y1="133" x2="352" y2="240" />
+        <line class="bridge-strut" x1="600" y1="112" x2="600" y2="240" />
+        <line class="bridge-strut" x1="847" y1="133" x2="847" y2="240" />
+        <line class="bridge-strut" x1="1017" y1="175" x2="1017" y2="240" />
+        <!-- Endpoint nodes -->
+        <circle class="bridge-node" cx="40" cy="240" r="8" />
+        <circle class="bridge-node" cx="1160" cy="240" r="8" />
+        <!-- Traveling light -->
+        <circle class="bridge-dot" cx="40" cy="240" r="6" />
+      </svg>
+
+      <!-- Endpoint labels -->
+      <figcaption class="mt-4 flex items-center justify-between text-xs sm:text-sm">
+        <span class="max-w-[42%] text-left">
+          <span class="block font-heading font-semibold text-white/90">Where your brand is</span>
+          <span class="block text-white/45">Untapped potential</span>
+        </span>
+        <span class="max-w-[42%] text-right">
+          <span class="block font-heading font-semibold text-cyan">Where it deserves to be</span>
+          <span class="block text-white/45">Measurable growth</span>
+        </span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<style>
+  #bridge-signature .bridge-draw {
+    fill: none;
+    stroke: #37c1f0;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 6px rgba(55, 193, 240, 0.55));
+  }
+  #bridge-signature .bridge-strut {
+    stroke: rgba(55, 193, 240, 0.5);
+    stroke-width: 1.5;
+    opacity: 0;
+  }
+  #bridge-signature .bridge-node {
+    fill: #37c1f0;
+    filter: drop-shadow(0 0 9px rgba(55, 193, 240, 0.9));
+  }
+  #bridge-signature .bridge-dot {
+    fill: #ffffff;
+    filter: drop-shadow(0 0 10px rgba(55, 193, 240, 1));
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #bridge-signature .bridge-dot {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
+
+  gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+
+  const root = document.querySelector<HTMLElement>('#bridge-signature');
+  if (root) {
+    const draws = root.querySelectorAll<SVGPathElement>('.bridge-draw');
+    const struts = root.querySelectorAll<SVGLineElement>('.bridge-strut');
+    const arch = root.querySelector<SVGPathElement>('.bridge-arch');
+    const dot = root.querySelector<SVGCircleElement>('.bridge-dot');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduce) {
+      draws.forEach((p) => (p.style.strokeDashoffset = '0'));
+      gsap.set(struts, { opacity: 1 });
+    } else {
+      const tl = gsap.timeline({
+        scrollTrigger: { trigger: root, start: 'top 78%', end: 'bottom 65%', scrub: 1 },
+      });
+      tl.to(draws, { strokeDashoffset: 0, ease: 'none', duration: 1 }, 0)
+        .to(struts, { opacity: 1, duration: 0.35, stagger: 0.06 }, 0.25);
+      if (dot && arch) {
+        tl.to(
+          dot,
+          {
+            motionPath: { path: arch, align: arch, alignOrigin: [0.5, 0.5] },
+            ease: 'none',
+            duration: 1,
+          },
+          0
+        );
+      }
+    }
+  }
+</script>

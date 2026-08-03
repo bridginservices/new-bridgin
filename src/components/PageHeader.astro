@@ -13,7 +13,7 @@ const { eyebrow, title, subtitle } = Astro.props;
   <div class="container-x relative text-center">
     {eyebrow && <p class="eyebrow justify-center">{eyebrow}</p>}
     <h1 class="text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-      <slot name="title"><span class="text-gradient-cyan">{title}</span></slot>
+      <slot name="title"><span class="text-gradient-cyan" data-decode>{title}</span></slot>
     </h1>
     {subtitle && <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/60">{subtitle}</p>}
   </div>

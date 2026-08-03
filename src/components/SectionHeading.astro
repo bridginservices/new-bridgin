@@ -10,7 +10,7 @@ const { eyebrow, title, subtitle, center = false, class: className = '' } = Astr
 ---
 <div class:list={['max-w-2xl', center && 'mx-auto text-center', className]}>
   {eyebrow && <p class:list={['eyebrow', center && 'justify-center']}>{eyebrow}</p>}
-  <h2 class="reveal text-display">
+  <h2 class="reveal text-display" data-decode>
     <slot name="title">{title}</slot>
   </h2>
   {subtitle && <p class:list={['reveal mt-5 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg', center && 'mx-auto']} data-delay="0.1">{subtitle}</p>}
