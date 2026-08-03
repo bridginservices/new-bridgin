@@ -20,6 +20,10 @@
     background-color: var(--bg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Clip horizontal spill (slide-in reveals, decorative glows, carousels)
+       without creating a scroll container — keeps mobile/tablet from ever
+       scrolling sideways. */
+    overflow-x: clip;
   }
 
   /* Respect users who prefer reduced motion — kill non-essential motion. */
@@ -39,7 +43,7 @@
 
   body {
     @apply bg-ink-900 font-body text-offwhite antialiased;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   h1,

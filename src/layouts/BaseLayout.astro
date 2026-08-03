@@ -146,12 +146,14 @@ const { title, description, ogImage, type, noindex } = Astro.props;
 
         const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-        // ── Signature FX #1: cursor spotlight / aurora ───────────────────
-        const spot = document.createElement('div');
-        spot.className = 'cursor-spot';
-        document.body.appendChild(spot);
-        gsap.set(spot, { xPercent: -50, yPercent: -50 });
+        // ── Signature FX #1: cursor spotlight (fine-pointer only) ────────
+        // Cursor-driven, so it's skipped on touch devices — no cursor to
+        // follow, and a continuous blend-mode repaint would cost battery.
         if (finePointer) {
+          const spot = document.createElement('div');
+          spot.className = 'cursor-spot';
+          document.body.appendChild(spot);
+          gsap.set(spot, { xPercent: -50, yPercent: -50 });
           const sx = gsap.quickTo(spot, 'x', { duration: 0.5, ease: 'power3.out' });
           const sy = gsap.quickTo(spot, 'y', { duration: 0.5, ease: 'power3.out' });
           window.addEventListener(
@@ -164,21 +166,7 @@ const { title, description, ogImage, type, noindex } = Astro.props;
             { passive: true }
           );
           document.addEventListener('mouseleave', () => (spot.style.opacity = '0'));
-        } else {
-          // Touch / coarse pointer: a slow drifting aurora instead.
-          gsap.set(spot, { x: window.innerWidth * 0.5, y: window.innerHeight * 0.35, opacity: 0.6 });
-          gsap.to(spot, {
-            x: () => window.innerWidth * (0.3 + Math.random() * 0.4),
-            y: () => window.innerHeight * (0.25 + Math.random() * 0.4),
-            duration: 8,
-            ease: 'sine.inOut',
-            repeat: -1,
-            yoyo: true,
-            repeatRefresh: true,
-          });
-        }
 
-        if (finePointer) {
           // ── Signature FX #2a: magnetic primary CTAs (preset #3) ────────
           gsap.utils.toArray<HTMLElement>('.btn-primary').forEach((btn) => {
             // Let GSAP fully own transform; keep colour/shadow transitions.
