@@ -25,7 +25,7 @@ const dateStr = data.pubDate.toLocaleDateString('en-US', {
   day: 'numeric',
 });
 ---
-<article class="reveal group surface overflow-hidden surface-hover flex flex-col" data-delay={(index % 3) * 0.08}>
+<article class="reveal group surface overflow-hidden surface-hover flex flex-col" data-reveal="scale" data-delay={(index % 3) * 0.08}>
   <a href={`/blogs/${post.id}`} class="block">
     <figure class="relative m-0 aspect-[16/9] overflow-hidden">
       <Image

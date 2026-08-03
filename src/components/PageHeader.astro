@@ -9,7 +9,7 @@ const { eyebrow, title, subtitle } = Astro.props;
 ---
 <section class="relative overflow-hidden border-b border-white/5 bg-ink-950 bg-radial-cyan pb-16 pt-32 md:pb-20 md:pt-40">
   <div class="pointer-events-none absolute inset-0 cyber-grid opacity-30 animate-gridDrift"></div>
-  <div class="glow-blob pointer-events-none absolute left-1/2 top-0 h-72 w-[40rem] -translate-x-1/2"></div>
+  <div class="glow-blob pointer-events-none absolute left-1/2 top-0 h-72 w-[40rem] -translate-x-1/2" data-parallax="24" data-parallax-cx="true"></div>
   <div class="container-x relative text-center">
     {eyebrow && <p class="eyebrow justify-center">{eyebrow}</p>}
     <h1 class="text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">

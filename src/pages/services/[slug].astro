@@ -24,7 +24,7 @@ const related = [1, 2, 3].map((o) => services[(idx + o) % services.length]);
     <div class="container-x grid gap-12 lg:grid-cols-3">
       <!-- Main -->
       <div class="lg:col-span-2">
-        <div class="reveal flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan/10 text-cyan shadow-glow">
+        <div class="reveal flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan/25 bg-cyan/10 text-cyan shadow-glow">
           <Icon name={service.icon} class="h-8 w-8" />
         </div>
         <h2 class="reveal mt-6 text-2xl font-bold sm:text-3xl">Overview</h2>
@@ -32,8 +32,8 @@ const related = [1, 2, 3].map((o) => services[(idx + o) % services.length]);
 
         <h2 class="reveal mt-10 text-2xl font-bold">What's Included</h2>
         <ul class="mt-5 grid gap-3 sm:grid-cols-2">
-          {service.included.map((item) => (
-            <li class="reveal flex items-start gap-3 surface p-4">
+          {service.included.map((item, i) => (
+            <li class="reveal flex items-start gap-3 surface p-4" data-reveal="scale" data-delay={(i % 2) * 0.06}>
               <span class="mt-0.5 text-cyan"><Icon name="check" class="h-5 w-5" /></span>
               <span class="text-sm text-white/80">{item}</span>
             </li>
@@ -54,7 +54,7 @@ const related = [1, 2, 3].map((o) => services[(idx + o) % services.length]);
       <!-- Sidebar -->
       <aside class="lg:col-span-1">
         <div class="sticky top-24 space-y-6">
-          <div class="surface p-6">
+          <div class="surface top-accent p-6">
             <h3 class="text-lg font-semibold text-white">Ready to grow with {service.name}?</h3>
             <p class="mt-2 text-sm text-white/65">Book a free consultation and get a tailored plan for your business.</p>
             <a href="/contact-us" class="btn-primary mt-5 w-full">Get a Free Consultation</a>

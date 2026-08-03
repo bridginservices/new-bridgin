@@ -14,6 +14,7 @@ const { service, index = 0 } = Astro.props;
 <a
   href={`/services/${service.slug}`}
   class="reveal group surface surface-hover flex flex-col p-7"
+  data-reveal="scale"
   data-delay={(index % 3) * 0.08}
 >
   <div class="flex items-center justify-between">

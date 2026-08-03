@@ -25,7 +25,7 @@ const socials = [
     <div class="container-x grid gap-10 lg:grid-cols-5">
       <!-- Form -->
       <div class="lg:col-span-3">
-        <div class="surface p-6 sm:p-8">
+        <div class="surface top-accent p-6 sm:p-8">
           <!--
             FORM BACKEND — DECISION POINT (spec §9 / §14):
             This is a static Astro site, so the form needs a third-party
@@ -95,21 +95,21 @@ const socials = [
       <aside class="lg:col-span-2">
         <div class="space-y-4">
           <a href={site.phoneHref} class="surface surface-hover flex items-center gap-4 p-5">
-            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan/10 text-cyan"><Icon name="phone" class="h-5 w-5" /></span>
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cyan/20 bg-cyan/10 text-cyan"><Icon name="phone" class="h-5 w-5" /></span>
             <span>
               <span class="block text-xs uppercase tracking-widest text-white/45">Call us</span>
               <span class="font-medium text-white">{site.phone}</span>
             </span>
           </a>
           <a href={`mailto:${site.email}`} class="surface surface-hover flex items-center gap-4 p-5">
-            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan/10 text-cyan"><Icon name="mail" class="h-5 w-5" /></span>
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cyan/20 bg-cyan/10 text-cyan"><Icon name="mail" class="h-5 w-5" /></span>
             <span>
               <span class="block text-xs uppercase tracking-widest text-white/45">Email us</span>
               <span class="font-medium text-white">{site.email}</span>
             </span>
           </a>
           <div class="surface flex items-center gap-4 p-5">
-            <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan/10 text-cyan"><Icon name="pin" class="h-5 w-5" /></span>
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-cyan/20 bg-cyan/10 text-cyan"><Icon name="pin" class="h-5 w-5" /></span>
             <span>
               <span class="block text-xs uppercase tracking-widest text-white/45">Visit us</span>
               <span class="font-medium text-white">{site.address}</span>
@@ -161,6 +161,7 @@ const socials = [
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
   .form-input::placeholder { color: rgba(255, 255, 255, 0.35); }
+  .form-input:hover { border-color: rgba(255, 255, 255, 0.22); }
   .form-input:focus {
     outline: none;
     border-color: #37C1F0;

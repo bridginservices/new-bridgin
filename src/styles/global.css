@@ -195,14 +195,13 @@
     border: 0;
   }
 
-  /* Fade/slide entrance base state — GSAP or IntersectionObserver reveals it.
-     Falls back to visible if JS is off or reduced-motion is set. */
+  /* Fade/slide entrance base state — GSAP animates the reveal directly
+     (see BaseLayout motion engine). Falls back to visible if JS is off or
+     reduced-motion is set. No CSS transition here: GSAP fully owns the
+     motion, and a transition would fight gsap.set() on load. */
   .reveal {
     opacity: 0;
     transform: translateY(28px);
-    transition:
-      opacity 0.7s ease,
-      transform 0.7s ease;
   }
   .reveal.is-visible {
     opacity: 1;

@@ -74,22 +74,39 @@ const { title, description, ogImage, type, noindex } = Astro.props;
 
     <WhatsAppButton />
 
-    <!-- Global scroll-reveal: reveals .reveal elements on scroll.
-         Uses GSAP ScrollTrigger when available, with an
-         IntersectionObserver fallback, and respects reduced motion. -->
+    <!-- Global motion engine — scroll reveals, directional/scale variants,
+         and subtle decorative parallax. Follows the ui-ux-pro-max GSAP
+         motion presets: transform/opacity only, scoped ScrollTriggers,
+         and full reduced-motion opt-out. -->
     <script>
       import { gsap } from 'gsap';
       import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const els = Array.from(document.querySelectorAll<HTMLElement>('.reveal'));
+      const revealEls = Array.from(document.querySelectorAll<HTMLElement>('.reveal'));
 
       if (reduce) {
-        els.forEach((el) => el.classList.add('is-visible'));
+        // Reduced motion: show everything instantly, no transforms.
+        revealEls.forEach((el) => el.classList.add('is-visible'));
       } else {
         gsap.registerPlugin(ScrollTrigger);
-        els.forEach((el) => {
+
+        // The from-state per reveal variant (preset #4 fade/slide, #8 scale).
+        const fromVars = (v: string): gsap.TweenVars => {
+          switch (v) {
+            case 'fade':  return { opacity: 0 };
+            case 'left':  return { opacity: 0, x: -48 };
+            case 'right': return { opacity: 0, x: 48 };
+            case 'scale': return { opacity: 0, scale: 0.94, y: 18 };
+            case 'up':
+            default:      return { opacity: 0, y: 28 };
+          }
+        };
+
+        revealEls.forEach((el) => {
+          const variant = el.dataset.reveal || 'up';
           const delay = parseFloat(el.dataset.delay || '0');
+          gsap.set(el, fromVars(variant));
           ScrollTrigger.create({
             trigger: el,
             start: 'top 88%',
@@ -97,12 +114,33 @@ const { title, description, ogImage, type, noindex } = Astro.props;
             onEnter: () =>
               gsap.to(el, {
                 opacity: 1,
+                x: 0,
                 y: 0,
-                duration: 0.7,
+                scale: 1,
+                duration: variant === 'scale' ? 0.6 : 0.7,
                 delay,
-                ease: 'power2.out',
+                ease: variant === 'scale' ? 'back.out(1.4)' : 'power2.out',
+                clearProps: 'transform',
                 onStart: () => el.classList.add('is-visible'),
               }),
+          });
+        });
+
+        // Decorative parallax (preset #13, subtle) — background/glow layers only.
+        gsap.utils.toArray<HTMLElement>('[data-parallax]').forEach((layer) => {
+          const strength = parseFloat(layer.dataset.parallax || '12');
+          // GSAP owns transform, so re-apply horizontal centering for layers
+          // that were centered via Tailwind's -translate-x-1/2.
+          if (layer.dataset.parallaxCx !== undefined) gsap.set(layer, { xPercent: -50 });
+          gsap.to(layer, {
+            yPercent: strength,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: layer.parentElement || layer,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 0.6,
+            },
           });
         });
       }
